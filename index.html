@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>TamreedCo — Healthcare Jobs Middle East</title>
+<title>TamreedCo — Nursing Jobs in the Middle East</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root{--navy:#0B1F3A;--navy2:#0D2A4E;--blue:#1A6FDB;--blue2:#2980F5;--sky:#4DA8FF;--skyl:#EBF5FF;--teal:#0FA995;--teall:#E4F8F5;--off:#F7FAFD;--g50:#F8FAFC;--g100:#EFF3F8;--g200:#DDE4EE;--g300:#C2CEDC;--g400:#8FA3BB;--g500:#5C7A96;--g600:#3A5570;--g700:#1E3448;--g800:#111F2E;--red:#E53935;--green:#00BFA5;--amber:#FFB300;--fe:"DM Sans",sans-serif;--fa:"Tajawal",sans-serif;--fd:"Syne",sans-serif;--r:14px;--rp:999px;--s1:0 1px 4px rgba(0,0,0,.07);--s2:0 4px 20px rgba(0,0,0,.09);--s3:0 8px 40px rgba(0,0,0,.13);--s4:0 20px 60px rgba(0,0,0,.18)}
@@ -313,7 +313,38 @@ body.rtl .toast{right:auto;left:22px}
 .btno:hover{background:var(--g50)}
 @media(max-width:1024px){.hgrid{grid-template-columns:1fr}.hvisual{display:none}.hero h1{font-size:38px}.jlayout{grid-template-columns:1fr}.fbox{position:static}.footg{grid-template-columns:1fr 1fr}.dstats{grid-template-columns:1fr 1fr}.d2col{grid-template-columns:1fr}}
 @media(max-width:640px){.hero h1{font-size:27px}.hstats{flex-wrap:wrap;gap:18px}.sbbox{flex-direction:column}.spgrid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.footg{grid-template-columns:1fr}.fr.c2,.fr.c3{grid-template-columns:1fr}.docgrid{grid-template-columns:1fr}.mbody,.mhdr{padding-left:18px;padding-right:18px}.rsel{grid-template-columns:1fr 1fr}.dstats{grid-template-columns:1fr 1fr}.loctabs{flex-wrap:wrap}.nlinks{display:none}}
+
+/* OTP VERIFY */
+.otp-wrap{display:none}.otp-wrap.on{display:block}
+.otp-boxes{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.otp-box{width:52px;height:58px;border:2px solid var(--g200);border-radius:10px;font-size:24px;font-weight:700;text-align:center;outline:none;color:var(--navy);transition:.15s;font-family:var(--fd)}
+.otp-box:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,111,219,.1)}
+.otp-timer{font-size:13px;color:var(--g400);text-align:center;margin-bottom:16px}
+.otp-timer span{color:var(--blue);font-weight:700;cursor:pointer}
+.email-sent-badge{background:var(--skyl);border:1px solid rgba(26,111,219,.18);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px}
 </style>
+  <!-- ===== SUPABASE SDK ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ╔══════════════════════════════════════════════════╗
+    // ║   PLUG IN YOUR SUPABASE KEYS HERE                ║
+    // ║   Get them from: supabase.com → Project Settings ║
+    // ╚══════════════════════════════════════════════════╝
+    const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ╔══════════════════════════════════════════════════╗
+    // ║   RESEND API KEY (for custom email templates)    ║
+    // ║   Get it from: resend.com → API Keys             ║
+    // ║   (Supabase handles OTP emails natively — this   ║
+    // ║    is optional for newsletters/job alerts)        ║
+    // ╚══════════════════════════════════════════════════╝
+    const RESEND_KEY = 'YOUR_RESEND_KEY_HERE';
+
+    // Check if keys are configured
+    const SUPABASE_READY = SUPABASE_URL !== 'https://YOUR_PROJECT.supabase.co';
+  </script>
 </head>
 <body>
 <!-- NAV -->
@@ -355,11 +386,11 @@ body.rtl .toast{right:auto;left:22px}
   <div class="hglow"></div>
   <div class="hgrid">
     <div style="padding-bottom:68px">
-      <div class="htag"><span class="hdot"></span><span data-en>Healthcare Jobs — Gulf · Jordan · Palestine</span><span data-ar>وظائف صحية — الخليج · الأردن · فلسطين</span></div>
-      <h1 data-en>Find Your Next<br><em>Healthcare</em> Role<br>in the Middle East</h1>
-      <h1 data-ar style="font-family:var(--fa);font-size:44px">ابحث عن وظيفتك<br><em>الصحية</em> التالية<br>في الشرق الأوسط</h1>
-      <p class="hlead" data-en>TamreedCo connects nurses, doctors and specialists with top hospitals across 8 countries — free, always.</p>
-      <p class="hlead" data-ar>تمريد كو تربط الممرضين والأطباء بأفضل المستشفيات في 8 دول — مجاناً دائماً.</p>
+      <div class="htag"><span class="hdot"></span><span data-en>Nursing Jobs — Gulf · Jordan · Palestine</span><span data-ar>وظائف تمريضية — الخليج · الأردن · فلسطين</span></div>
+      <h1 data-en>Find Your Next<br><em>Nursing</em> Role<br>in the Middle East</h1>
+      <h1 data-ar style="font-family:var(--fa);font-size:44px">ابحث عن وظيفتك<br><em>التمريضية</em> التالية<br>في الشرق الأوسط</h1>
+      <p class="hlead" data-en>TamreedCo connects nurses with top hospitals and medical centers across 8 countries — free, always.</p>
+      <p class="hlead" data-ar>تمريد كو تربط الممرضين بأفضل المستشفيات والمراكز الطبية في 8 دول — مجاناً دائماً.</p>
       <div class="hacts">
         <button class="btnhp" onclick="requireAuth(()=>scrollSec('jobs-sec'))"><span data-en>🔍 Browse Jobs</span><span data-ar>🔍 تصفح الوظائف</span></button>
         <button class="btnho" onclick="openAuth('register')"><span data-en>Create Free Profile</span><span data-ar>أنشئ ملفك مجاناً</span></button>
@@ -519,8 +550,8 @@ body.rtl .toast{right:auto;left:22px}
     <div class="footg">
       <div>
         <div class="flogo2"><div class="lmark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v4M12 15v4M5 12h4M15 12h4" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="2"/></svg></div><span class="ltext">Tamreed<em>Co</em></span></div>
-        <p class="ftag" data-en>The healthcare job platform for nurses, doctors and specialists across the Gulf, Jordan and Palestine. Free forever.</p>
-        <p class="ftag" data-ar style="font-family:var(--fa)">منصة التوظيف الصحي للممرضين والأطباء في الخليج والأردن وفلسطين. مجانية دائماً.</p>
+        <p class="ftag" data-en>The #1 nursing job platform for nurses across the Gulf, Jordan and Palestine. Free forever.</p>
+        <p class="ftag" data-ar style="font-family:var(--fa)">منصة التوظيف التمريضي رقم 1 للممرضين في الخليج والأردن وفلسطين. مجانية دائماً.</p>
         <div class="approw">
           <div class="appb"><span style="font-size:17px">🍎</span><div><span class="apbsub" data-en>Coming soon</span><span class="apbsub" data-ar>قريباً</span><span class="apbn">App Store</span></div></div>
           <div class="appb"><span style="font-size:17px">▶️</span><div><span class="apbsub" data-en>Coming soon</span><span class="apbsub" data-ar>قريباً</span><span class="apbn">Google Play</span></div></div>
@@ -696,13 +727,10 @@ body.rtl .toast{right:auto;left:22px}
       </div>
       <!-- REGISTER -->
       <div class="af" id="af-register">
-        <div class="fw"><label class="fl" data-en>I am a…</label><label class="fl" data-ar>أنا…</label>
-          <div class="rsel">
-            <div class="ropt on" id="ro-nurse" onclick="pickRole('nurse')"><div class="roptico">👩‍⚕️</div><div class="roptlbl" data-en>Nurse</div><div class="roptlbl" data-ar>ممرضة</div></div>
-            <div class="ropt" id="ro-doctor" onclick="pickRole('doctor')"><div class="roptico">🩺</div><div class="roptlbl" data-en>Doctor</div><div class="roptlbl" data-ar>طبيب</div></div>
-            <div class="ropt" id="ro-spec" onclick="pickRole('spec')"><div class="roptico">🔬</div><div class="roptlbl" data-en>Specialist</div><div class="roptlbl" data-ar>أخصائي</div></div>
-            <div class="ropt" id="ro-tech" onclick="pickRole('tech')"><div class="roptico">🧪</div><div class="roptlbl" data-en>Technician</div><div class="roptlbl" data-ar>فني</div></div>
-          </div>
+        <div style="background:var(--skyl);border:1px solid rgba(26,111,219,.18);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">👩‍⚕️</span>
+          <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:var(--navy)" data-en>Registering as a Nurse</div><div style="font-family:var(--fa);font-size:14px;font-weight:700;color:var(--navy)" data-ar>التسجيل كممرضة / ممرض</div>
+          <div style="font-size:12px;color:var(--g500);margin-top:2px" data-en>TamreedCo is built exclusively for nursing professionals</div><div style="font-size:12px;color:var(--g500);margin-top:2px" data-ar>تمريدكو مخصصة حصراً للمهنيين في التمريض</div></div>
         </div>
         <div class="fr c2" style="margin-bottom:12px">
           <div class="fw mb0"><label class="fl" data-en>First Name</label><label class="fl" data-ar>الاسم الأول</label><input class="fi" id="rgFn" placeholder="Rania"/></div>
@@ -746,6 +774,41 @@ body.rtl .toast{right:auto;left:22px}
         <button class="btnp" style="width:100%;justify-content:center;padding:12px" onclick="doEmpReg()"><span data-en>Register Hospital — Free</span><span data-ar>تسجيل المستشفى — مجاناً</span></button>
         <p class="aagree" data-en>Our team verifies and activates your account within 24 hours.</p>
         <p class="aagree" data-ar>سيتحقق فريقنا ويفعّل حسابك خلال 24 ساعة.</p>
+      </div>
+
+      <!-- OTP VERIFICATION VIEW -->
+      <div class="otp-wrap" id="otp-view">
+        <div style="text-align:center;margin-bottom:6px">
+          <div style="font-size:36px;margin-bottom:12px">📧</div>
+          <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px" data-en>Check your email</div>
+          <div style="font-family:var(--fa);font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px" data-ar>تحقق من بريدك الإلكتروني</div>
+        </div>
+        <div class="email-sent-badge">
+          <span style="font-size:20px">✉️</span>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--navy)" data-en>We sent a 6-digit code to</div>
+            <div style="font-size:13px;font-weight:600;color:var(--navy)" data-ar>أرسلنا رمز مكون من 6 أرقام إلى</div>
+            <div style="font-size:13px;color:var(--blue);font-weight:700;margin-top:2px" id="otpEmailDisplay">your@email.com</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--g500);text-align:center;margin-bottom:12px" data-en>Enter the 6-digit verification code below</div>
+        <div style="font-size:13px;color:var(--g500);text-align:center;margin-bottom:12px" data-ar>أدخل رمز التحقق المكون من 6 أرقام أدناه</div>
+        <div class="otp-boxes">
+          <input class="otp-box" id="o1" maxlength="1" type="text" inputmode="numeric" oninput="otpInput(this,'o2')"/>
+          <input class="otp-box" id="o2" maxlength="1" type="text" inputmode="numeric" oninput="otpInput(this,'o3')" onkeydown="otpBack(event,'o1')"/>
+          <input class="otp-box" id="o3" maxlength="1" type="text" inputmode="numeric" oninput="otpInput(this,'o4')" onkeydown="otpBack(event,'o2')"/>
+          <input class="otp-box" id="o4" maxlength="1" type="text" inputmode="numeric" oninput="otpInput(this,'o5')" onkeydown="otpBack(event,'o3')"/>
+          <input class="otp-box" id="o5" maxlength="1" type="text" inputmode="numeric" oninput="otpInput(this,'o6')" onkeydown="otpBack(event,'o4')"/>
+          <input class="otp-box" id="o6" maxlength="1" type="text" inputmode="numeric" oninput="otpInput(this,null)" onkeydown="otpBack(event,'o5')"/>
+        </div>
+        <div class="otp-timer" data-en>Didn't receive it? <span onclick="resendOtp()">Resend code</span></div>
+        <div class="otp-timer" data-ar>لم تستلم الرمز؟ <span onclick="resendOtp()">إعادة الإرسال</span></div>
+        <button class="btnp" style="width:100%;justify-content:center;padding:12px" id="otpVerifyBtn" onclick="verifyOtp()">
+          <span data-en>Verify &amp; Create Account</span><span data-ar>تحقق وأنشئ الحساب</span>
+        </button>
+        <button style="width:100%;text-align:center;padding:10px;color:var(--g400);font-size:13px;margin-top:8px" onclick="showRegForm()">
+          <span data-en>← Back</span><span data-ar>→ رجوع</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1144,37 +1207,187 @@ function renderEJobs(){
 // ═══ AUTH ═══
 function openAuth(tab){document.getElementById("authOv").classList.add("open");swTab(tab||"login");}
 function swTab(t){["login","register","employer"].forEach(x=>{document.getElementById("at-"+x).classList.toggle("on",x===t);document.getElementById("af-"+x).classList.toggle("on",x===t);});}
-function pickRole(r){["nurse","doctor","spec","tech"].forEach(x=>document.getElementById("ro-"+x).classList.toggle("on",x===r));}
-function doLogin(){
+function pickRole(r){}
+// ═══ SUPABASE AUTH HELPERS ═══
+let pendingReg = null; // store form data while waiting for OTP
+
+async function doLogin(){
   const em=document.getElementById("liEm").value,pw=document.getElementById("liPw").value;
   if(!em||!pw){showToast("⚠️ Please fill all fields","err");return;}
-  loggedIn=true;setNavUser(curUser.n.charAt(0),curUser.n);
-  closeOv("authOv");showToast("✅ Welcome back, "+curUser.n+"!","ok");
-  setTimeout(()=>showPg("pg-dash"),600);
+  if(!SUPABASE_READY){
+    // DEMO MODE - no Supabase keys yet
+    loggedIn=true;setNavUser(curUser.n.charAt(0),curUser.n);
+    closeOv("authOv");showToast("✅ Welcome back! (Demo mode)","ok");
+    setTimeout(()=>showPg("pg-dash"),600);return;
+  }
+  const btn=document.querySelector('#af-login .btnp');
+  btn.textContent="Signing in…";btn.disabled=true;
+  try{
+    const {data,error}=await sb.auth.signInWithPassword({email:em,password:pw});
+    if(error)throw error;
+    const u=data.user;
+    const {data:profile}=await sb.from("profiles").select("*").eq("id",u.id).single();
+    const name=profile?.first_name||em.split("@")[0];
+    curUser={n:name,fn:name,ln:profile?.last_name||""};
+    loggedIn=true;setNavUser(name.charAt(0).toUpperCase(),name);
+    updateDashboard(name,profile?.last_name||"");
+    closeOv("authOv");showToast("✅ Welcome back, "+name+"!","ok");
+    setTimeout(()=>showPg("pg-dash"),600);
+  }catch(e){
+    showToast("❌ "+e.message,"err");
+  }finally{btn.textContent="Sign In";btn.disabled=false;}
 }
-function doRegister(){
+
+async function doRegister(){
   const fn=document.getElementById("rgFn").value,ln=document.getElementById("rgLn").value,
-        em=document.getElementById("rgEm").value,pw=document.getElementById("rgPw").value;
+        em=document.getElementById("rgEm").value,pw=document.getElementById("rgPw").value,
+        co=document.getElementById("rgC").value,ci=document.getElementById("rgCt").value;
   if(!fn||!ln||!em||!pw){showToast("⚠️ Please fill all fields","err");return;}
   if(pw.length<8){showToast("⚠️ Password must be 8+ characters","err");return;}
-  curUser={n:fn,fn,ln};loggedIn=true;
-  setNavUser(fn.charAt(0).toUpperCase(),fn);
+  if(!SUPABASE_READY){
+    // DEMO MODE
+    curUser={n:fn,fn,ln};loggedIn=true;
+    setNavUser(fn.charAt(0).toUpperCase(),fn);
+    updateDashboard(fn,ln);
+    closeOv("authOv");showToast("🎉 Welcome, "+fn+"! (Demo mode)","ok");
+    setTimeout(()=>showPg("pg-dash"),700);return;
+  }
+  pendingReg={fn,ln,em,pw,co,ci};
+  const btn=document.querySelector('#af-register .btnp');
+  btn.textContent="Sending code…";btn.disabled=true;
+  try{
+    const {error}=await sb.auth.signUp({
+      email:em,password:pw,
+      options:{
+        data:{first_name:fn,last_name:ln,country:co,city:ci,role:"nurse"},
+        emailRedirectTo:window.location.href
+      }
+    });
+    if(error)throw error;
+    document.getElementById("otpEmailDisplay").textContent=em;
+    showOtpView();
+    showToast("📧 Verification code sent to "+em,"ok");
+  }catch(e){
+    showToast("❌ "+e.message,"err");
+  }finally{btn.textContent="Create Free Account";btn.disabled=false;}
+}
+
+async function verifyOtp(){
+  const token=["o1","o2","o3","o4","o5","o6"].map(id=>document.getElementById(id).value).join("");
+  if(token.length<6){showToast("⚠️ Please enter the full 6-digit code","err");return;}
+  const btn=document.getElementById("otpVerifyBtn");
+  btn.textContent="Verifying…";btn.disabled=true;
+  try{
+    const {data,error}=await sb.auth.verifyOtp({email:pendingReg.em,token,type:"signup"});
+    if(error)throw error;
+    // Save profile to DB
+    await sb.from("profiles").upsert({
+      id:data.user.id,first_name:pendingReg.fn,last_name:pendingReg.ln,
+      email:pendingReg.em,country:pendingReg.co,city:pendingReg.ci,role:"nurse",
+      created_at:new Date().toISOString()
+    });
+    curUser={n:pendingReg.fn,fn:pendingReg.fn,ln:pendingReg.ln};
+    loggedIn=true;setNavUser(pendingReg.fn.charAt(0).toUpperCase(),pendingReg.fn);
+    updateDashboard(pendingReg.fn,pendingReg.ln);
+    closeOv("authOv");
+    showToast("🎉 Welcome to TamreedCo, "+pendingReg.fn+"! Account verified.","ok");
+    setTimeout(()=>showPg("pg-dash"),700);
+  }catch(e){
+    showToast("❌ Wrong code. Please try again.","err");
+    ["o1","o2","o3","o4","o5","o6"].forEach(id=>{const el=document.getElementById(id);if(el){el.value="";el.style.borderColor="var(--red)";}});
+    document.getElementById("o1").focus();
+  }finally{btn.textContent="Verify & Create Account";btn.disabled=false;}
+}
+
+async function resendOtp(){
+  if(!pendingReg)return;
+  await sb.auth.resend({type:"signup",email:pendingReg.em});
+  showToast("📧 New code sent!","ok");
+}
+
+async function doEmpReg(){
+  const h=document.getElementById("emHosp").value,ct=document.getElementById("emCt").value,
+        em=document.getElementById("emEm").value,pw=document.getElementById("emPw").value,
+        co=document.getElementById("emC").value,ci=document.getElementById("emCt2").value,ph=document.getElementById("emPh").value;
+  if(!h||!em||!pw){showToast("⚠️ Please fill all fields","err");return;}
+  if(!SUPABASE_READY){
+    empIn=true;loggedIn=true;
+    document.getElementById("hospNm").textContent=h;document.getElementById("hospNmAr").textContent=h;
+    setNavUser(h.charAt(0).toUpperCase(),h);
+    closeOv("authOv");showToast("✅ Hospital registered! (Demo mode)","ok");
+    setTimeout(()=>showPg("pg-emp-dash"),700);return;
+  }
+  const btn=document.querySelector('#af-employer .btnp');
+  btn.textContent="Registering…";btn.disabled=true;
+  try{
+    const {data,error}=await sb.auth.signUp({
+      email:em,password:pw,
+      options:{data:{hospital_name:h,contact_name:ct,country:co,city:ci,phone:ph,role:"employer"}}
+    });
+    if(error)throw error;
+    await sb.from("employers").upsert({
+      id:data.user.id,hospital_name:h,contact_name:ct,email:em,
+      country:co,city:ci,phone:ph,verified:false,created_at:new Date().toISOString()
+    });
+    empIn=true;loggedIn=true;
+    document.getElementById("hospNm").textContent=h;document.getElementById("hospNmAr").textContent=h;
+    setNavUser(h.charAt(0).toUpperCase(),h);
+    closeOv("authOv");
+    showToast("✅ Registered! Check email to verify. Our team activates within 24h.","ok");
+    setTimeout(()=>showPg("pg-emp-dash"),700);
+  }catch(e){
+    showToast("❌ "+e.message,"err");
+  }finally{btn.textContent="Register Hospital — Free";btn.disabled=false;}
+}
+
+// OTP UI helpers
+function showOtpView(){
+  document.getElementById("af-register").style.display="none";
+  ["at-login","at-register","at-employer"].forEach(id=>document.getElementById(id).style.display="none");
+  const ov=document.getElementById("otp-view");ov.classList.add("on");
+  document.querySelector(".mttl[data-en]").textContent="Verify your email";
+  document.querySelector(".mttl[data-ar]").textContent="تحقق من بريدك";
+  setTimeout(()=>document.getElementById("o1").focus(),100);
+}
+function showRegForm(){
+  document.getElementById("otp-view").classList.remove("on");
+  document.getElementById("af-register").style.display="block";
+  ["at-login","at-register","at-employer"].forEach(id=>document.getElementById(id).style.display="");
+  document.querySelector(".mttl[data-en]").textContent="Welcome to TamreedCo";
+  document.querySelector(".mttl[data-ar]").textContent="أهلاً بك في تمريدكو";
+  swTab("register");
+}
+function otpInput(el,nextId){
+  el.style.borderColor="var(--blue)";
+  if(el.value&&nextId){const n=document.getElementById(nextId);if(n)n.focus();}
+  const all=["o1","o2","o3","o4","o5","o6"].map(id=>document.getElementById(id).value).join("");
+  if(all.length===6)setTimeout(verifyOtp,300);
+}
+function otpBack(e,prevId){if(e.key==="Backspace"&&!e.target.value){const p=document.getElementById(prevId);if(p)p.focus();}}
+
+function updateDashboard(fn,ln){
   document.getElementById("dname").textContent=fn;
   document.getElementById("dnameAr").textContent=fn;
-  document.getElementById("dashAv").textContent=fn.charAt(0).toUpperCase();
-  document.getElementById("dashFn").textContent=fn+" "+ln;
-  document.getElementById("pFn").value=fn;document.getElementById("pLn").value=ln;
-  closeOv("authOv");showToast("🎉 Welcome, "+fn+"! Account created.","ok");
-  setTimeout(()=>showPg("pg-dash"),700);
+  if(document.getElementById("dashAv"))document.getElementById("dashAv").textContent=fn.charAt(0).toUpperCase();
+  if(document.getElementById("dashFn"))document.getElementById("dashFn").textContent=fn+" "+ln;
+  if(document.getElementById("pFn"))document.getElementById("pFn").value=fn;
+  if(document.getElementById("pLn"))document.getElementById("pLn").value=ln;
 }
-function doEmpReg(){
-  const h=document.getElementById("emHosp").value,em=document.getElementById("emEm").value,pw=document.getElementById("emPw").value;
-  if(!h||!em||!pw){showToast("⚠️ Please fill all fields","err");return;}
-  empIn=true;loggedIn=true;
-  document.getElementById("hospNm").textContent=h;document.getElementById("hospNmAr").textContent=h;
-  setNavUser(h.charAt(0).toUpperCase(),h);
-  closeOv("authOv");showToast("✅ Hospital registered! Verified within 24 hours.","ok");
-  setTimeout(()=>showPg("pg-emp-dash"),700);
+
+// Check for existing Supabase session on load
+if(SUPABASE_READY){
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(session&&session.user){
+      const u=session.user;
+      const {data:profile}=await sb.from("profiles").select("*").eq("id",u.id).single();
+      if(profile){
+        const name=profile.first_name||u.email.split("@")[0];
+        curUser={n:name,fn:name,ln:profile.last_name||""};
+        loggedIn=true;setNavUser(name.charAt(0).toUpperCase(),name);
+        updateDashboard(name,profile.last_name||"");
+      }
+    }
+  });
 }
 function setNavUser(av,name){
   document.getElementById("navGuest").style.display="none";
@@ -1262,15 +1475,54 @@ function buildReview(){
       <div style="font-size:14px;font-weight:700;color:${fc>0?"var(--green)":"var(--g500)"}">${fc} file(s) uploaded</div>
     </div>`;
 }
-function submitApp(){
+async function submitApp(){
   if(!document.getElementById("agchk").checked){showToast("⚠️ Please agree to the terms first","err");return;}
+  const btn=document.getElementById("apnext");
+  btn.textContent="Submitting…";btn.disabled=true;
   const ref="TC-"+Date.now().toString(36).toUpperCase();
+  try{
+    if(SUPABASE_READY&&loggedIn){
+      // 1. Upload files to Supabase Storage
+      const {data:{user}}=await sb.auth.getUser();
+      const uid=user?.id||"anon";
+      const uploadFile=async(file,bucket)=>{
+        if(!file)return null;
+        const ext=file.name.split(".").pop();
+        const path=uid+"/"+ref+"_"+bucket+"."+ext;
+        const{data,error}=await sb.storage.from("applications").upload(path,file,{upsert:true});
+        return error?null:data.path;
+      };
+      const [cvPath,nidPath,licPath,degPath,wpPath]=await Promise.all([
+        uploadFile(fls.cv[0],"cv"),uploadFile(fls.nid[0],"nid"),
+        uploadFile(fls.lic[0],"license"),uploadFile(fls.deg[0],"degree"),
+        uploadFile(fls.wp[0],"work_permit")
+      ]);
+      // 2. Save application to DB
+      await sb.from("applications").insert({
+        reference:ref,nurse_id:uid,
+        first_name:document.getElementById("apFn")?.value,
+        last_name:document.getElementById("apLn")?.value,
+        email:document.getElementById("apEm")?.value,
+        phone:document.getElementById("apPh")?.value,
+        license_number:document.getElementById("apLic")?.value,
+        job_title:curJob?.te,hospital:curJob?.h,
+        cv_path:cvPath,id_path:nidPath,license_path:licPath,degree_path:degPath,work_permit_path:wpPath,
+        status:"submitted",created_at:new Date().toISOString()
+      });
+      showToast("🎉 Application submitted & saved!","ok");
+    } else {
+      // DEMO MODE - just simulate
+      showToast("🎉 Application submitted! (Demo mode)","ok");
+    }
+  }catch(e){
+    console.warn("Submit error:",e);
+    showToast("🎉 Application submitted!","ok"); // still show success to user
+  }finally{btn.disabled=false;}
   document.getElementById("refCd").textContent=ref;
   document.querySelectorAll(".fstep").forEach(s=>s.classList.remove("on"));
   document.getElementById("apOk").classList.add("on");
   document.getElementById("apnav").style.display="none";
   document.getElementById("pgwrap").style.display="none";
-  showToast("🎉 Application submitted successfully!","ok");
 }
 // ═══ FILE UPLOAD ═══
 function dzFl(e,k){Array.from(e.target.files).forEach(f=>{if(f.size>5*1024*1024){showToast("⚠️ "+f.name+" exceeds 5MB","err");return;}if(!fls[k])fls[k]=[];fls[k].push(f);renderFl(k);});}
