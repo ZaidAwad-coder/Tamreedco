@@ -236,7 +236,7 @@ body.rtl .hcard-left{left:auto;right:-28px}
 .plan-feats li[data-ar]{display:none}
 body.rtl .plan-feats li[data-en]{display:none}
 body.rtl .plan-feats li[data-ar]{display:flex}
-body.rtl .nright .lbtn{display:none}
+body.rtl .nright .lbtn{display:none!important}
 .plan-feats li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
 .btn-plan{width:100%;padding:10px;border-radius:var(--rp);font-size:13px;font-weight:700;transition:.15s}
 .btn-plan.primary{background:var(--blue);color:#fff}
@@ -2478,20 +2478,11 @@ function showToast(msg,type){
 }
 
 // ══ COUNTUP ANIMATION ══
-function runCountup(el, target, suffix, duration){
-  var start=0, step=Math.ceil(target/60), interval=Math.round(duration/60);
-  el.textContent="0"+suffix;
-  var t=setInterval(function(){
-    start+=step;
-    if(start>=target){ start=target; clearInterval(t); }
-    el.textContent=(start>=1000?(start/1000).toFixed(start%1000===0?0:1)+"k":start)+suffix;
-  },interval);
-}
 function initCountup(){
   var stats=[
-    {id:"stat-nurses",   target:9000, suffix:"k+",  display:9, useK:true},
-    {id:"stat-hospitals",target:600,  suffix:"+",   display:600, useK:false},
-    {id:"stat-countries",target:8,    suffix:"",    display:8, useK:false}
+    {id:"stat-nurses",   target:9000, suffix:"+"},
+    {id:"stat-hospitals",target:600,  suffix:"+"},
+    {id:"stat-countries",target:8,    suffix:""}
   ];
   var done=false;
   var observer=new IntersectionObserver(function(entries){
@@ -2502,17 +2493,13 @@ function initCountup(){
         stats.forEach(function(s){
           var el=document.getElementById(s.id);
           if(!el) return;
-          var end=s.target, suffix=s.suffix, dur=1400;
+          var end=s.target, dur=1400;
           var current=0, steps=50, inc=Math.ceil(end/steps), iv=Math.round(dur/steps);
-          el.textContent="0"+(suffix||"");
+          el.textContent="0"+(s.suffix||"");
           var t=setInterval(function(){
             current+=inc;
             if(current>=end){ current=end; clearInterval(t); }
-            if(s.useK){
-              el.textContent=(current/1000).toFixed(current<9000?1:0)+"k"+suffix.replace("k+","+");
-            } else {
-              el.textContent=current+suffix;
-            }
+            el.textContent=current.toLocaleString()+s.suffix;
           },iv);
         });
       }
