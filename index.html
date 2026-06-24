@@ -1616,7 +1616,7 @@ function sendContact(){
       resetForm();
 
       // Also try Edge Function for email (non-blocking — form already cleared)
-      fetch('https://bwxrcjtwckzdwkhzuknw.supabase.co/functions/v1/contact-email',{
+      fetch('https://bwxrcjtwckzdwkhzuknw.supabase.co/functions/v1/hyper-worker',{
         method:'POST',
         headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3eHJjanR3Y2t6ZHdraHp1a253Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzk5MDQsImV4cCI6MjA5NTgxNTkwNH0.yFMLu92L7u-DN8DUER-HpnFbmxQO-Fc4W2wsUr1kJJU'},
         body:JSON.stringify({name:name,email:email,subject:subject,message:msg})
