@@ -233,6 +233,10 @@ body.rtl .hcard-left{left:auto;right:-28px}
 .plan-cvs.unlim{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-color:#F59E0B;color:#92400E}
 .plan-feats{list-style:none;margin-bottom:22px}
 .plan-feats li{font-size:12px;color:var(--g600);padding:4px 0;display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+.plan-feats li[data-ar]{display:none}
+body.rtl .plan-feats li[data-en]{display:none}
+body.rtl .plan-feats li[data-ar]{display:flex}
+body.rtl .nright .lbtn{display:none}
 .plan-feats li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
 .btn-plan{width:100%;padding:10px;border-radius:var(--rp);font-size:13px;font-weight:700;transition:.15s}
 .btn-plan.primary{background:var(--blue);color:#fff}
@@ -633,18 +637,6 @@ body.rtl .toast{right:auto;left:20px}
 
 <!-- FEATURED STRIP -->
 <div class="featured">
-  <div class="feat-in">
-    <span class="feat-lbl" data-en>Hospitals in our network</span>
-    <span class="feat-lbl" data-ar>مستشفيات في شبكتنا</span>
-    <div class="feat-logos">
-      <span class="feat-logo">🇯🇴 King Hussein MC</span>
-      <span class="feat-logo">🇵🇸 Al-Makassed</span>
-      <span class="feat-logo">🇸🇦 Saudi German</span>
-      <span class="feat-logo">🇦🇪 Cleveland Clinic AD</span>
-      <span class="feat-logo">🇶🇦 Hamad Medical</span>
-      <span class="feat-logo">🇰🇼 Al-Amiri Hospital</span>
-    </div>
-  </div>
 </div>
 
 <!-- HOW IT WORKS -->
@@ -731,17 +723,17 @@ body.rtl .toast{right:auto;left:20px}
   <div class="stats-grid-3">
     <div style="background:var(--off);border-radius:16px;padding:28px 20px;border:1.5px solid var(--g200)">
       <div style="font-size:32px;margin-bottom:10px">👩‍⚕️</div>
-      <div style="font-family:var(--fd);font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px">9,000+</div>
+      <div id="stat-nurses" style="font-family:var(--fd);font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px">9,000+</div>
       <div style="font-size:13px;color:var(--g500)" data-en>Nursing professionals</div><div style="font-size:13px;color:var(--g500)" data-ar>ممرض محترف</div>
     </div>
     <div style="background:var(--off);border-radius:16px;padding:28px 20px;border:1.5px solid var(--g200)">
       <div style="font-size:32px;margin-bottom:10px">🏥</div>
-      <div style="font-family:var(--fd);font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px">600+</div>
+      <div id="stat-hospitals" style="font-family:var(--fd);font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px">600+</div>
       <div style="font-size:13px;color:var(--g500)" data-en>Hospitals &amp; clinics</div><div style="font-size:13px;color:var(--g500)" data-ar>مستشفى وعيادة</div>
     </div>
     <div style="background:var(--off);border-radius:16px;padding:28px 20px;border:1.5px solid var(--g200)">
       <div style="font-size:32px;margin-bottom:10px">🌍</div>
-      <div style="font-family:var(--fd);font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px">8</div>
+      <div style="font-family:var(--fd);font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px" id="stat-countries">8</div>
       <div style="font-size:13px;color:var(--g500)" data-en>Countries covered</div><div style="font-size:13px;color:var(--g500)" data-ar>دول مشمولة</div>
     </div>
   </div>
@@ -1784,12 +1776,13 @@ function goHome(){ showPg("pg-home"); }
 function goDash(){ showPg(empIn?"pg-emp-dash":"pg-nurse-dash"); }
 function empGate(){
   if(empIn&&loggedIn){
-    // Check verified flag cached in DOM
     var pv=document.getElementById("pg-pending-verify");
     if(pv&&pv.classList.contains("pg-active")){ return; }
     showPg("pg-pricing"); doReveal();
   } else {
-    showPg("pg-pricing");
+    // Not logged in — prompt hospital login, then go to pricing
+    window._pendingReveal=true;
+    openAuth("employer");
   }
 }
 function selPlan(p){ selectedPlan=p; }
@@ -2258,6 +2251,14 @@ function restoreSession(name,ln,role,verified){
     var hna=document.getElementById("hospNmAr");if(hna)hna.textContent=name;
     setNav(name.charAt(0).toUpperCase(),name);
     if(!verified){ showPg("pg-pending-verify"); return; }
+    // Verified employer — check if coming from verification email link
+    var hash=window.location.hash;
+    if(hash==="#verified" || hash==="#pg-pricing"){
+      history.replaceState(null,"",window.location.pathname);
+      showPg("pg-pricing"); doReveal(); showToast("✅ Account verified! Welcome to TamreedCo.","ok");
+    } else {
+      showPg("pg-emp-dash");
+    }
   }
 }
 
@@ -2475,6 +2476,52 @@ function showToast(msg,type){
   if(_tt) clearTimeout(_tt);
   _tt=setTimeout(function(){t.classList.remove("show");},3800);
 }
+
+// ══ COUNTUP ANIMATION ══
+function runCountup(el, target, suffix, duration){
+  var start=0, step=Math.ceil(target/60), interval=Math.round(duration/60);
+  el.textContent="0"+suffix;
+  var t=setInterval(function(){
+    start+=step;
+    if(start>=target){ start=target; clearInterval(t); }
+    el.textContent=(start>=1000?(start/1000).toFixed(start%1000===0?0:1)+"k":start)+suffix;
+  },interval);
+}
+function initCountup(){
+  var stats=[
+    {id:"stat-nurses",   target:9000, suffix:"k+",  display:9, useK:true},
+    {id:"stat-hospitals",target:600,  suffix:"+",   display:600, useK:false},
+    {id:"stat-countries",target:8,    suffix:"",    display:8, useK:false}
+  ];
+  var done=false;
+  var observer=new IntersectionObserver(function(entries){
+    if(done) return;
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        done=true;
+        stats.forEach(function(s){
+          var el=document.getElementById(s.id);
+          if(!el) return;
+          var end=s.target, suffix=s.suffix, dur=1400;
+          var current=0, steps=50, inc=Math.ceil(end/steps), iv=Math.round(dur/steps);
+          el.textContent="0"+(suffix||"");
+          var t=setInterval(function(){
+            current+=inc;
+            if(current>=end){ current=end; clearInterval(t); }
+            if(s.useK){
+              el.textContent=(current/1000).toFixed(current<9000?1:0)+"k"+suffix.replace("k+","+");
+            } else {
+              el.textContent=current+suffix;
+            }
+          },iv);
+        });
+      }
+    });
+  },{threshold:0.3});
+  var anchor=document.getElementById("stat-nurses");
+  if(anchor) observer.observe(anchor.closest("div")||anchor);
+}
+document.addEventListener("DOMContentLoaded",initCountup);
 </script>
 </body>
 </html>
