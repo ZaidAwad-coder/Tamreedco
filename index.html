@@ -244,7 +244,7 @@ body.rtl .hw-ttl[data-ar],body.rtl .hw-dsc[data-ar]{display:block}
 body.rtl .hw-ttl[data-en],body.rtl .hw-dsc[data-en]{display:none}
 body.rtl .plan-feats li[data-en]{display:none}
 body.rtl .plan-feats li[data-ar]{display:flex}
-body.rtl .nright .lbtn{display:none!important}
+/* lbtn hidden in RTL only on mobile - desktop shows it for switching back */
 @media(max-width:1024px){body.rtl .nright{display:none!important}}
 .plan-feats li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
 .btn-plan{width:100%;padding:10px;border-radius:var(--rp);font-size:13px;font-weight:700;transition:.15s}
@@ -500,6 +500,7 @@ body.rtl .toast{right:auto;left:20px}
 @media(max-width:1024px){
   .nright .nblog,.nright .nbfill{display:none}
   .nright .lbtn{display:none}
+  body.rtl .nright .lbtn{display:none}
   .hamburger{display:flex}
 }
 </style>
